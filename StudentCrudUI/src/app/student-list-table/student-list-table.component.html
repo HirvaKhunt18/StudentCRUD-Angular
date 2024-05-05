@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-4">
+  <button class="btn btn-primary" (click)="goToStudentForm()">
+    Add New Student
+  </button>
+  
+<br><br>
+<h1>Student List</h1>
+  </div>
+  <div class="col-8">
+    <img src="assets/images/school.jpg"  class="school-img" alt="school-img" />
+  </div>
+</div>
+ <div class="row">
+   <form style="margin-bottom: 15px;" class="col-8">
+    <div class="input-group">
+      <input class="form-control" type="text" [formControl]="filter" placeholder="Search" />
+    </div>
+  </form>
+  <div class="col-2">
+    <button type="button" class="btn btn-primary" (click)="onClearSearchInput()" >Clear</button>
+  </div>
+</div>
+  <table ngb-table [dataSource]="dataSource" ngb-sort>
+    <ng-container ngbColumnDef="studentId">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Student Id</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.studentId }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="firstName">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>First Name</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.firstName }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="lastName">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Last Name</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.lastName }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="gender">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Gender</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.gender }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="stateName">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>State Name</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.stateName }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="cityName">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>City Name</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.cityName }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="hobbyName">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Hobby Name</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.hobbyName }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="email">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Email</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.email }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="phoneNumber">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Phone Number</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.phoneNumber }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="dateOfBirth">
+      <th *ngbHeaderCellDef ngb-header-cell ngb-sort-header>Date of Birth</th>
+      <td *ngbCellDef="let student" ngb-cell>{{ student.dateOfBirth | date }}</td>
+    </ng-container>
+  
+    <ng-container ngbColumnDef="actions">
+      <th *ngbHeaderCellDef ngb-header-cell>Actions</th>
+      <td *ngbCellDef="let student" ngb-cell>
+        <button type="button" class="btn btn-success" (click)="editStudent(student.studentId)">
+          <i class="fa fa-edit"></i> 
+        </button>
+        <button type="button" class="btn btn-danger" (click)="deleteStudent(student.studentId)">
+          <i class="fa fa-trash"></i> 
+        </button>
+      </td>
+    </ng-container>
+  
+    <tr *ngbHeaderRowDef="columnsToDisplay" ngb-header-row></tr>
+    <tr ngb-row *ngbRowDef="let student; columns:columnsToDisplay;"></tr>
+  </table>
+  
+  <!-- <ngb-paginator [pageIndex]="1" [pageSize]="10" [length]="dataSource.data.length"></ngb-paginator> -->
+  <ngb-paginator 
+  [collectionSize]="totalItems"  
+  [page]="page"  
+  [pageSize]="pageSize"
+  [pageSizes]="pageSizes"
+  [boundaryLinks]="true"> 
+</ngb-paginator>
+  

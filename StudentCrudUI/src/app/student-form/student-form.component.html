@@ -1,0 +1,282 @@
+<div class="container">
+  <h1 *ngIf="!isEditMode">Add Student</h1>
+  <h1 *ngIf="isEditMode">Edit Student</h1>
+  <br />
+  <div class="row">
+    <div class="col-8">
+      <form
+        class="student-form"
+        [formGroup]="studentForm"
+        (ngSubmit)="onSubmitForm()"
+      >
+        <div class="form-group col-10">
+          <label for="name">First Name:</label>
+          <input
+            [class.is-invalid]="
+              f['firstName'].invalid && f['firstName'].touched
+            "
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            id="fname"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['firstName'].invalid && f['firstName'].touched"
+        >
+          <div
+            *ngIf="f['firstName'].errors && f['firstName'].errors['required']"
+          >
+            *First Name is Required.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="name">Last Name:</label>
+          <input
+            [class.is-invalid]="f['lastName'].invalid && f['lastName'].touched"
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            id="lname"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['lastName'].invalid && f['lastName'].touched"
+        >
+          <div *ngIf="f['lastName'].errors && f['lastName'].errors['required']">
+            *Last Name is Required.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="email">Email:</label>
+          <input
+            [class.is-invalid]="f['email'].invalid && f['email'].touched"
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['email'].invalid && f['email'].touched"
+        >
+          <div *ngIf="f['email'].errors && f['email'].errors['required']">
+            *Email is Required.
+          </div>
+          <div *ngIf="f['email'].errors && f['email'].errors['pattern']">
+            *Please Enter Valid Email.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="stateDropdown">State:</label>
+          <select
+            class="form-control col-8"
+            (change)="onStateChange($event)"
+            formControlName="stateId"
+            [class.is-invalid]="f['stateId'].invalid && f['stateId'].touched"
+          >
+            <option value="" disabled selected>Select a State</option>
+            <option
+              *ngFor="let state of stateDropDownData"
+              [value]="state.stateId"
+            >
+              {{ state.stateName }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['stateId'].invalid && f['stateId'].touched"
+        >
+          <div *ngIf="f['stateId'].errors && f['stateId'].errors['required']">
+            *Please Select State.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="citiesDropdown">Cities:</label>
+          <select
+            class="form-control col-8"
+            formControlName="cityId"
+            [class.is-invalid]="f['cityId'].invalid && f['cityId'].touched"
+          >
+            <option value="" disabled selected>Select a City</option>
+            <option
+              *ngFor="let city of citiesDropdownData"
+              [value]="city.cityId"
+            >
+              {{ city.cityName }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['cityId'].invalid && f['cityId'].touched"
+        >
+          <div *ngIf="f['cityId'].errors && f['cityId'].errors['required']">
+            *Please Select City.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="phoneNumber">Phone Number:</label>
+          <input
+            [class.is-invalid]="
+              f['phoneNumber'].invalid && f['phoneNumber'].touched
+            "
+            type="text"
+            class="form-control"
+            id="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['phoneNumber'].invalid && f['phoneNumber'].touched"
+        >
+          <div
+            *ngIf="
+              f['phoneNumber'].errors && f['phoneNumber'].errors['required']
+            "
+          >
+            *PhoneNumber is Required.
+          </div>
+          <div
+            *ngIf="
+              f['phoneNumber'].errors && f['phoneNumber'].errors['pattern']
+            "
+          >
+            *PhoneNumber can not be more/less than 10 characters.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="dob">Date of Birth:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="dob"
+            formControlName="dob"
+            [class.is-invalid]="f['dob'].invalid && f['dob'].touched"
+          />
+        </div>
+        <div class="text-danger" *ngIf="f['dob'].invalid && f['dob'].touched">
+          <div *ngIf="f['dob'].errors && f['dob'].errors['required']">
+            *Please Select Date of Birth.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="address">Address:</label>
+          <textarea
+            [class.is-invalid]="f['address'].invalid && f['address'].touched"
+            class="form-control"
+            id="address"
+            formControlName="address"
+          ></textarea>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['address'].invalid && f['address'].touched"
+        >
+          <div *ngIf="f['address'].errors && f['address'].errors['required']">
+            *Address is Required.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label>Gender:</label><br />
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              formControlName="gender"
+              id="male"
+              value="M"
+            />
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              formControlName="gender"
+              id="female"
+              value="F"
+            />
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['gender'].invalid && f['gender'].touched"
+        >
+          <div *ngIf="f['gender'].errors && f['gender'].errors['required']">
+            *Gender is Required.
+          </div>
+        </div>
+        <br />
+        <div class="form-group col-10">
+          <label for="hobbies">Hobbies:</label>
+
+          <div class="checkbox-list">
+            <div
+              *ngFor="let hobby of hobbiesCheckboxesData"
+              class="checkbox-item"
+            >
+              <label>
+                <input
+                  type="checkbox"
+                  name="hobbies"
+                  [checked]="hobby.checked"
+                  [value]="hobby.hobbyId"
+                  class="checkbox-input"
+                  (change)="onHobbiesChange($event, hobby.hobbyId)"
+                />
+                {{ hobby.hobbyName }}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['hobbies'].invalid && f['hobbies'].touched"
+        >
+          <div
+            *ngIf="
+             ( f['hobbies'].errors) &&
+              f['hobbies'].errors['atLeastOneHobbySelectedValidator']
+            "
+          >
+            *Hobby is Required & Select atleast one hobby.
+          </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">{{ buttonName }}</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" (click)="onCancel()">
+          Cancel
+        </button>
+        <br />
+        <br />
+      </form>
+    </div>
+    <div class="col-4 image-container">
+      <img src="assets/images/image1.jpg" alt="Example Image" />
+      <img
+        src="assets/images/tree.png"
+        alt="Tree Image"
+        class="treeimg"
+        style="margin-top: 60px"
+      />
+    </div>
+  </div>
+</div>

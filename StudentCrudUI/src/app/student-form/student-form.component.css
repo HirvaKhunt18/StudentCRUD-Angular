@@ -1,0 +1,25 @@
+.image-container {
+    flex-direction: column ; /* Push to the right side */
+  }
+
+  .checkbox-list {
+    display: flex;
+  }
+  
+  .checkbox-item {
+    margin-right: 25px; /* Add some space between checkboxes */
+  }
+  
+  .checkbox-label {
+    align-items: center;
+    margin-top: 5px; /* Center align checkbox and label */
+  }
+  
+  .checkbox-input {
+    margin-right: 20px; 
+    margin-bottom: 12px;/* Add some space between checkbox and label */
+  }
+  
+  .treeimg{
+    margin-left:-100px ;
+  }
