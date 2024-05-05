@@ -1,5 +1,6 @@
 <h1> Home Page</h1>
 ![image](https://github.com/HirvaKhunt18/StudentCRUD-Angular/assets/149611169/7db5ece1-97c3-4de6-a931-9d8a90d02224)
+<br>
 ![image](https://github.com/HirvaKhunt18/StudentCRUD-Angular/assets/149611169/25019442-39a7-4d73-8db7-cba93cc6d239)
 
 <h1>Add Form</h1>
